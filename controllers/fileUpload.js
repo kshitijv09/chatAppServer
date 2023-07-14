@@ -1,5 +1,6 @@
 const fs = require("fs");
 const imageModel = require("../models/Image");
+
 const uploadImage = (req, res) => {
   const saveImage = imageModel({
     name: req.body.name,
@@ -18,4 +19,10 @@ const uploadImage = (req, res) => {
     });
   res.send("image is saved");
 };
-module.exports = { uploadImage };
+
+const getImage = async (req, res) => {
+  const allData = await imageModel.find();
+  res.json(allData);
+};
+
+module.exports = { uploadImage, getImage };
