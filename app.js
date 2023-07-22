@@ -36,7 +36,7 @@ app.use(errorHandlerMiddleware);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -89,7 +89,7 @@ io.on("connection", (socket) => {
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
-    server.listen(PORT, () => {
+    server.listen(PORT, "0.0.0.0", () => {
       console.log("Server is Spinning");
     });
   } catch (error) {
